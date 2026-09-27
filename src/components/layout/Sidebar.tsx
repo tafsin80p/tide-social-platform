@@ -201,19 +201,25 @@ export function Sidebar() {
         </div>
 
         {/* Logout Button */}
-        <div className={cn("w-full bg-surface/40 backdrop-blur-md border border-border-subtle/50 shadow-sm flex flex-col items-center justify-center p-4 transition-all duration-300 hover:bg-error/10 hover:border-error/30 cursor-pointer group", collapsed ? "rounded-[2rem] aspect-square" : "rounded-3xl")} onClick={handleLogout}>
-          <button className="w-12 h-12 rounded-full bg-surface-elevated text-text-secondary flex items-center justify-center shadow-sm group-hover:bg-error group-hover:text-white transition-all mb-2 flex-shrink-0">
+        <button 
+          onClick={handleLogout}
+          className={cn(
+            "w-full bg-surface/40 backdrop-blur-md border border-border-subtle/50 shadow-sm flex items-center transition-all duration-300 hover:bg-error hover:border-error hover:shadow-[0_4px_15px_rgba(239,68,68,0.3)] cursor-pointer group",
+            collapsed ? "justify-center rounded-[1.5rem] aspect-square p-0" : "px-4 py-3 rounded-[1.25rem] gap-3"
+          )}
+        >
+          <div className={cn(
+            "rounded-full text-text-secondary flex items-center justify-center transition-all flex-shrink-0 group-hover:text-white", 
+            collapsed ? "w-10 h-10" : "w-8 h-8 bg-surface-elevated group-hover:bg-white/20"
+          )}>
             <LogOut className="w-5 h-5" />
-          </button>
+          </div>
           {!collapsed && (
-            <div className="text-center">
-              <h4 className="text-sm font-bold text-text-primary group-hover:text-error transition-colors">Sign Out</h4>
-              <p className="text-[10px] text-text-muted mt-0.5">
-                See you later!
-              </p>
+            <div className="flex-1 text-left">
+              <span className="text-sm font-medium text-text-primary group-hover:text-white transition-colors">Sign Out</span>
             </div>
           )}
-        </div>
+        </button>
       </div>
     </aside>
   );
