@@ -24,8 +24,11 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "TIDO",
+  },
+  icons: {
+    apple: "https://res.cloudinary.com/mum1nwin/image/upload/w_180,h_180,c_fill,f_png/v1790515216/tido_logo.png",
   },
   formatDetection: {
     telephone: false,
