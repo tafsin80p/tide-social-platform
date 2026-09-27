@@ -70,7 +70,7 @@ export default function RegisterPage() {
       >
         <div className="bg-surface-elevated/80 backdrop-blur-xl border border-border-subtle rounded-3xl p-8 shadow-2xl">
           <div className="flex flex-col items-center mb-8">
-            <img src="/logo.jpg" alt="TIDO Logo" className="w-16 h-16 rounded-2xl mb-4 shadow-[0_0_20px_rgba(38,100,236,0.3)] object-cover" />
+            <img src="https://res.cloudinary.com/mum1nwin/image/upload/v1790515216/tido_logo.jpg" alt="TIDO Logo" className="w-16 h-16 rounded-2xl mb-4 shadow-[0_0_20px_rgba(38,100,236,0.3)] object-cover" />
             <h1 className="text-2xl font-bold text-text-primary tracking-tight">Create an account</h1>
             <p className="text-text-secondary text-sm mt-2 text-center">
               Join TIDO to experience more than just messaging.
