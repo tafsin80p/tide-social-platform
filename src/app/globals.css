@@ -1,1 +1,123 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-surface-elevated: var(--surface-elevated);
+  
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+
+  --font-sans: "Proxima Nova", var(--font-inter), system-ui, sans-serif;
+}
+
+@layer base {
+  /* Scale the entire app perfectly to fit any screen from 1920px down to 1024px */
+  @media (min-width: 1024px) and (max-width: 1919px) {
+    html {
+      zoom: calc(100vw / 1920);
+    }
+  }
+
+  :root {
+    --primary: #2664EC;
+    --primary-hover: #1E50BC;
+    --primary-light: rgba(38, 100, 236, 0.15);
+    
+    /* Light Mode Tokens */
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-hover: #F1F5F9;
+    --surface-active: #E2E8F0;
+    --surface-elevated: #FFFFFF;
+    
+    --border: #E2E8F0;
+    --border-subtle: rgba(0, 0, 0, 0.05);
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+  }
+
+  .dark {
+    /* Dark Mode Tokens */
+    --background: #0A0F1C;
+    --surface: #101625;
+    --surface-hover: #182236;
+    --surface-active: #1D2941;
+    --surface-elevated: #161E32;
+    
+    --border: #1F2C47;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-surface-elevated/70 backdrop-blur-md border border-border-subtle;
+  }
+  
+  .glass-panel {
+    @apply bg-surface/80 backdrop-blur-lg border border-border-subtle;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Scrollbar for desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+}
