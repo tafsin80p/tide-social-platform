@@ -28,7 +28,7 @@ export function AppLoader() {
           className="w-16 h-16 rounded-2xl overflow-hidden relative shadow-lg z-10 bg-background flex items-center justify-center"
         >
           <img
-            src="/logo.jpg"
+            src="https://res.cloudinary.com/mum1nwin/image/upload/v1790515216/tido_logo.jpg"
             alt="Loading..."
             className="w-full h-full object-cover"
           />
