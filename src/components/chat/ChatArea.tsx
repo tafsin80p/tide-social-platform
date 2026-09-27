@@ -17,7 +17,7 @@ const VoiceMessagePlayer = ({ src, isMe = false }: { src: string, isMe?: boolean
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
 
   const updateProgress = () => {
     if (audioRef.current && !audioRef.current.paused) {
