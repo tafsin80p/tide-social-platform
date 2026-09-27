@@ -4,6 +4,8 @@ import connectDB from "@/lib/mongodb";
 import Conversation from "@/models/Conversation";
 import Message from "@/models/Message";
 import User from "@/models/User";
+import { Notification } from "@/models/Notification";
+import { sendPushNotification } from "@/lib/onesignal";
 import { getUserSession } from "./auth";
 import { revalidatePath } from "next/cache";
 
@@ -82,6 +84,21 @@ export async function sendMessage(conversationId: string, text: string, replyToI
         const currentCount = conversation.unreadCounts?.get(otherIdStr) || 0;
         if (!conversation.unreadCounts) conversation.unreadCounts = new Map();
         conversation.unreadCounts.set(otherIdStr, currentCount + 1);
+
+        // create notification
+        await Notification.create({
+          recipient: otherParticipant,
+          sender: session.id,
+          type: "new_message",
+          text: text.substring(0, 30) // Preview text
+        });
+
+        await sendPushNotification(
+          [otherParticipant.toString()],
+          `New message from ${session.name}`,
+          text.substring(0, 100) || "Sent an attachment",
+          "/"
+        );
       }
       conversation.lastMessage = text;
       await conversation.save();

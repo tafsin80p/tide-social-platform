@@ -31,6 +31,7 @@ import { getUnreadCounts } from "@/actions/chat";
 import { getPendingRequests } from "@/actions/friend";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { NotificationDropdown } from "./NotificationDropdown";
 
 const initialMenuItems = [
   { name: "Chats", href: "/", icon: MessageSquare, badge: 0 },
@@ -190,10 +191,7 @@ export function Sidebar() {
             <button className="p-1.5 rounded-lg hover:bg-background text-text-muted hover:text-text-primary transition-colors flex-1 flex justify-center">
               <Activity className="w-4 h-4" />
             </button>
-            <button className="p-1.5 rounded-lg hover:bg-background text-text-muted hover:text-text-primary transition-colors relative flex-1 flex justify-center">
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-error"></span>
-            </button>
+            <NotificationDropdown />
             <button className="p-1.5 rounded-lg hover:bg-background text-text-muted hover:text-text-primary transition-colors flex-1 flex justify-center">
               <Zap className="w-4 h-4" />
             </button>

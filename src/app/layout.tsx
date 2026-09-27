@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
+import { OneSignalProvider } from "@/components/OneSignalProvider";
+import { getUserSession } from "@/actions/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,11 +37,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getUserSession();
+  
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="antialiased min-h-screen flex flex-col bg-background text-text-primary overflow-hidden">
@@ -51,6 +55,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster position="top-center" />
+          <OneSignalProvider userId={session?.id} />
         </ThemeProvider>
       </body>
     </html>

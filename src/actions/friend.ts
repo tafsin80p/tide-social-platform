@@ -4,6 +4,8 @@ import connectDB from "@/lib/mongodb";
 import { FriendRequest } from "@/models/FriendRequest";
 import User from "@/models/User";
 import Conversation from "@/models/Conversation";
+import { Notification } from "@/models/Notification";
+import { sendPushNotification } from "@/lib/onesignal";
 import { getUserSession } from "./auth";
 import { revalidatePath } from "next/cache";
 
@@ -32,6 +34,19 @@ export async function sendFriendRequest(receiverId: string) {
       sender: senderId,
       receiver: receiverId
     });
+
+    await Notification.create({
+      recipient: receiverId,
+      sender: senderId,
+      type: "friend_request"
+    });
+
+    await sendPushNotification(
+      [receiverId.toString()],
+      "New Friend Request",
+      `${session.name} sent you a friend request.`,
+      "/requests"
+    );
 
     revalidatePath("/find-friend");
     revalidatePath("/requests");
@@ -85,6 +100,19 @@ export async function respondToRequest(requestId: string, action: "accepted" | "
           participants: [request.sender, request.receiver],
         });
       }
+
+      await Notification.create({
+        recipient: request.sender,
+        sender: session.id,
+        type: "request_accepted"
+      });
+
+      await sendPushNotification(
+        [request.sender.toString()],
+        "Request Accepted",
+        `${session.name} accepted your friend request.`,
+        "/"
+      );
     }
 
     revalidatePath("/requests");
